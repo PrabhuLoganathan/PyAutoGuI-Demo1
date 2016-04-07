@@ -6,6 +6,8 @@ import pyautogui as p
 
 width, height = p.size()
 
+pointer_speed = 10
+scroll_speed = 5
 
 class Gui(QtGui.QMainWindow):
     cmd_signal = QtCore.pyqtSignal(str)
@@ -14,6 +16,9 @@ class Gui(QtGui.QMainWindow):
         self.ui = Ui_MainWindow()
         self.cmd_signal.connect(self.cmd_update)
         self.ui.setupUi(self)
+        self.ui.tabWidget.setCurrentIndex(0)
+        self.ui.scroll_speed.returnPressed.connect(self.update_scroll_speed)
+        self.ui.pointer_speed.returnPressed.connect(self.update_pointer_speed)
 
     def disable_all(self):
         self.ui.left_arrow.setEnabled(False)   
@@ -24,6 +29,27 @@ class Gui(QtGui.QMainWindow):
         self.ui.right_click.setEnabled(False)
         self.ui.scroll_down.setEnabled(False)
         self.ui.scroll_up.setEnabled(False)
+
+    def update_scroll_speed(self):
+        global scroll_speed
+        s = str(self.ui.scroll_speed.text())
+        if s.isdigit():
+            scroll_speed = int(s)
+        else:
+            self.ui.scroll_speed.setText('5')
+            scroll_speed = 5
+
+    def update_pointer_speed(self):
+        global pointer_speed
+        s = str(self.ui.pointer_speed.text())
+        
+        if s.isdigit():
+            pointer_speed = int(s)
+        else:
+            self.ui.pointer_speed.setText('10')
+            pointer_speed = 10
+
+
     def cmd_update(self,data):
         self.ui.cmd.setText(data)
         
@@ -37,7 +63,8 @@ class Worker(QtCore.QThread):
         self.gui = gui_obj
     
     def run(self):
-        
+        global scroll_speed
+        global pointer_speed
         while True:
             data = self.ser.read()
             self.gui.cmd_signal.emit(data)
@@ -65,7 +92,7 @@ class Worker(QtCore.QThread):
             elif data == 'a':
                 # print "Left Key"
                 try:
-                    p.moveRel(-10,0)
+                    p.moveRel(-1 * pointer_speed,0)
                     self.gui.disable_all()
                     self.gui.ui.left_arrow.setEnabled(True)
                 except Exception,e:
@@ -73,7 +100,7 @@ class Worker(QtCore.QThread):
             elif data == 'd':
                 # print "Right Key"
                 try:
-                    p.moveRel(10,0)
+                    p.moveRel(pointer_speed,0)
                     self.gui.disable_all()
                     self.gui.ui.right_arrow.setEnabled(True)
                 except Exception, e:
@@ -81,7 +108,7 @@ class Worker(QtCore.QThread):
             elif data == 's':
                 # print "Down key"
                 try:
-                    p.moveRel(0,10)
+                    p.moveRel(0,pointer_speed)
                     self.gui.disable_all()
                     self.gui.ui.down_arrow.setEnabled(True)
                 except Exception,e:
@@ -89,21 +116,21 @@ class Worker(QtCore.QThread):
             elif data == 'w':
                 # print "Up key"
                 try:
-                    p.moveRel(0,-10)
+                    p.moveRel(0,-1 * pointer_speed)
                     self.gui.disable_all()
                     self.gui.ui.up_arrow.setEnabled(True)
                 except Exception,e:
                     print e
             elif data == '4':
                 try:
-                    p.scroll(5)
+                    p.scroll(scroll_speed)
                     self.gui.disable_all()
                     self.gui.ui.scroll_up.setEnabled(True)
                 except Exception,e:
                     print e  
             elif data == '5':
                 try:
-                    p.scroll(-5)
+                    p.scroll(-1 * scroll_speed)
                     self.gui.disable_all()
                     self.gui.ui.scroll_down.setEnabled(True)
                 except Exception,e:
