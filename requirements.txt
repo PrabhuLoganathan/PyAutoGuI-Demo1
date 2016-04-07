@@ -1,0 +1,4 @@
+pyserial
+python-xlib
+pyautogui
+pyinstaller
