@@ -8,8 +8,6 @@ class Serial():
             self.ser.open()
         except serial.SerialException, e:
             print e
-        
-        print self.ser.isOpen()
 
     def read(self):
         ch = self.ser.read()
