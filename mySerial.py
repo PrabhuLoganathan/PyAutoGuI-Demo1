@@ -2,7 +2,7 @@ import serial
 
 class Serial():
     def __init__(self):
-        self.ser = serial.Serial('COM1')
+        self.ser = serial.Serial('/dev/ttyS0')
 
         try:
             self.ser.open()
@@ -14,7 +14,7 @@ class Serial():
     def read(self):
         ch = self.ser.read()
 
-        if ch == 'q':
+        if ch == '7':
             try:
                 self.ser.close()
             except serial.SerialException, e:
