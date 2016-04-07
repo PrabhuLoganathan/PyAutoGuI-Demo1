@@ -1,3 +1,5 @@
 sudo apt-get install scrot
 sudo apt-get install python-tk
 sudo apt-get install python-dev
+sudo apt-get install python-qt4
+sudo apt-get install python-qt4-dev
