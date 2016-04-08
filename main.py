@@ -66,7 +66,9 @@ class Worker(QtCore.QThread):
         global scroll_speed
         global pointer_speed
         while True:
+            print 2
             data = self.ser.read()
+            print data
             self.gui.cmd_signal.emit(data)
             if data == '7':
                 # print "ABORTING !!"
@@ -74,7 +76,7 @@ class Worker(QtCore.QThread):
                 break
             
             elif data == '1':
-                # print "Left Click"
+                print "Left Click"
                 try:
                     p.click(button = 'left')
                     self.gui.disable_all()
@@ -82,7 +84,7 @@ class Worker(QtCore.QThread):
                 except Exception, e:
                     print e
             elif data == '2':
-                # print "Right Click"
+                print "Right Click"
                 try:
                     p.click(button = 'right')
                     self.gui.disable_all()
@@ -90,7 +92,7 @@ class Worker(QtCore.QThread):
                 except Exception, e:
                     print e
             elif data == 'a':
-                # print "Left Key"
+                print "Left Key"
                 try:
                     p.moveRel(-1 * pointer_speed,0)
                     self.gui.disable_all()
@@ -98,7 +100,7 @@ class Worker(QtCore.QThread):
                 except Exception,e:
                     print e
             elif data == 'd':
-                # print "Right Key"
+                print "Right Key"
                 try:
                     p.moveRel(pointer_speed,0)
                     self.gui.disable_all()
@@ -106,7 +108,7 @@ class Worker(QtCore.QThread):
                 except Exception, e:
                     print e
             elif data == 's':
-                # print "Down key"
+                print "Down key"
                 try:
                     p.moveRel(0,pointer_speed)
                     self.gui.disable_all()
@@ -114,7 +116,7 @@ class Worker(QtCore.QThread):
                 except Exception,e:
                     print e
             elif data == 'w':
-                # print "Up key"
+                print "Up key"
                 try:
                     p.moveRel(0,-1 * pointer_speed)
                     self.gui.disable_all()
@@ -137,8 +139,11 @@ class Worker(QtCore.QThread):
                     print e  
             else:
                 print "Unknown cmd: ", data
+            print 3
+            
         
 def main():
+    print 1
     app = QtGui.QApplication(sys.argv)
     ex = Gui()
     ex.show()

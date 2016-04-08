@@ -2,7 +2,11 @@ import serial
 
 class Serial():
     def __init__(self):
-        self.ser = serial.Serial('/dev/ttyS0')
+
+        #try:
+        self.ser = serial.Serial('COM1')
+        #except SerialException:
+        #self.ser = serial.Serial('/dev/ttyS0')
 
         try:
             self.ser.open()
@@ -10,8 +14,8 @@ class Serial():
             print e
 
     def read(self):
-        ch = self.ser.read()
-
+        ch = self.ser.read(1)
+        print ch
         if ch == '7':
             try:
                 self.ser.close()
