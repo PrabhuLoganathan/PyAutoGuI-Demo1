@@ -8,7 +8,6 @@ import pyautogui as p
 width, height = p.size()
 
 pointer_speed = 10
-scroll_speed = 5
 
 class Gui(QtGui.QMainWindow):
     cmd_signal = QtCore.pyqtSignal(str)
@@ -18,7 +17,6 @@ class Gui(QtGui.QMainWindow):
         self.cmd_signal.connect(self.cmd_update)
         self.ui.setupUi(self)
         self.ui.tabWidget.setCurrentIndex(1)
-        self.ui.scroll_speed.returnPressed.connect(self.update_scroll_speed)
         self.ui.pointer_speed.returnPressed.connect(self.update_pointer_speed)
         self.ui.com_port.returnPressed.connect(self.set_com)
 
@@ -32,17 +30,6 @@ class Gui(QtGui.QMainWindow):
         self.ui.down_arrow.setEnabled(False)
         self.ui.left_click.setEnabled(False)
         self.ui.right_click.setEnabled(False)
-        self.ui.scroll_down.setEnabled(False)
-        self.ui.scroll_up.setEnabled(False)
-
-    def update_scroll_speed(self):
-        global scroll_speed
-        s = str(self.ui.scroll_speed.text())
-        if s.isdigit():
-            scroll_speed = int(s)
-        else:
-            self.ui.scroll_speed.setText('5')
-            scroll_speed = 5
 
     def update_pointer_speed(self):
         global pointer_speed
@@ -75,7 +62,6 @@ class Worker(QtCore.QThread):
         self.gui.ui.tabWidget.setCurrentIndex(0)
     
     def run(self):
-        global scroll_speed
         global pointer_speed
         while True:
             data = self.ser.read()
