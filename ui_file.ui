@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>290</width>
-    <height>298</height>
+    <height>261</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,11 +23,11 @@
       <x>0</x>
       <y>0</y>
       <width>291</width>
-      <height>251</height>
+      <height>241</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -37,9 +37,9 @@
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>180</y>
+        <y>170</y>
         <width>211</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -78,44 +78,11 @@
         <x>30</x>
         <y>20</y>
         <width>231</width>
-        <height>151</height>
+        <height>131</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="2" column="5">
-        <widget class="QToolButton" name="right_arrow">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="arrowType">
-          <enum>Qt::RightArrow</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" rowspan="3">
-        <widget class="Line" name="line_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QToolButton" name="scroll_up">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="arrowType">
-          <enum>Qt::UpArrow</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
+       <item row="2" column="0">
         <widget class="QToolButton" name="scroll_down">
          <property name="enabled">
           <bool>false</bool>
@@ -128,22 +95,15 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="6" rowspan="3">
-        <widget class="Line" name="line_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2" rowspan="3">
+       <item row="0" column="1" rowspan="3">
         <widget class="Line" name="line">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
-        <widget class="QToolButton" name="up_arrow">
+       <item row="0" column="0">
+        <widget class="QToolButton" name="scroll_up">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -155,8 +115,8 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="4">
-        <widget class="QToolButton" name="down_arrow">
+       <item row="1" column="4">
+        <widget class="QToolButton" name="right_arrow">
          <property name="enabled">
           <bool>false</bool>
          </property>
@@ -164,25 +124,11 @@
           <string/>
          </property>
          <property name="arrowType">
-          <enum>Qt::DownArrow</enum>
+          <enum>Qt::RightArrow</enum>
          </property>
         </widget>
        </item>
-       <item row="4" column="0" colspan="7">
-        <widget class="Line" name="line_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="7">
-        <widget class="Line" name="line_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
+       <item row="1" column="2">
         <widget class="QToolButton" name="left_arrow">
          <property name="enabled">
           <bool>false</bool>
@@ -195,7 +141,85 @@
          </property>
         </widget>
        </item>
+       <item row="2" column="3">
+        <widget class="QToolButton" name="down_arrow">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::DownArrow</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QToolButton" name="up_arrow">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="arrowType">
+          <enum>Qt::UpArrow</enum>
+         </property>
+        </widget>
+       </item>
       </layout>
+     </widget>
+     <widget class="Line" name="line_4">
+      <property name="geometry">
+       <rect>
+        <x>22</x>
+        <y>10</y>
+        <width>251</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>150</y>
+        <width>251</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="Line" name="line_2">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>20</y>
+        <width>20</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -212,7 +236,7 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="1" column="1">
+       <item row="2" column="1">
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -225,7 +249,7 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="3">
+       <item row="1" column="3">
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -238,7 +262,7 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="3">
+       <item row="2" column="3">
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -251,36 +275,79 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>Pointer</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
+       <item row="2" column="2">
         <widget class="QLineEdit" name="pointer_speed">
          <property name="placeholderText">
           <string>default = 10</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
+       <item row="1" column="2">
         <widget class="QLineEdit" name="scroll_speed">
          <property name="placeholderText">
           <string>default = 5</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
+       <item row="1" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Scroll</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="1" column="1">
         <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>COM</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="com_port">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>default = 0 (COM1)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer_6">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -303,7 +370,7 @@
      <x>0</x>
      <y>0</y>
      <width>290</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
