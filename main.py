@@ -4,6 +4,7 @@ import sys
 from mySerial import Serial
 import pyautogui as p
 
+
 width, height = p.size()
 
 pointer_speed = 10
@@ -16,9 +17,13 @@ class Gui(QtGui.QMainWindow):
         self.ui = Ui_MainWindow()
         self.cmd_signal.connect(self.cmd_update)
         self.ui.setupUi(self)
-        self.ui.tabWidget.setCurrentIndex(0)
+        self.ui.tabWidget.setCurrentIndex(1)
         self.ui.scroll_speed.returnPressed.connect(self.update_scroll_speed)
         self.ui.pointer_speed.returnPressed.connect(self.update_pointer_speed)
+        self.ui.com_port.returnPressed.connect(self.set_com)
+
+    def set_com(self):
+        th.com_change.emit()
 
     def disable_all(self):
         self.ui.left_arrow.setEnabled(False)   
@@ -56,17 +61,22 @@ class Gui(QtGui.QMainWindow):
 
 class Worker(QtCore.QThread):
     quit_app = QtCore.pyqtSignal()
+    com_change = QtCore.pyqtSignal()
 
     def __init__(self, gui_obj,parent=None):
         super(Worker, self).__init__()
         self.ser = Serial()
         self.gui = gui_obj
+        self.com_change.connect(self.ser_update)
+
+    def ser_update(self):
+        self.ser.port = int(self.gui.ui.com_port.text())
+        self.ser.open()
     
     def run(self):
         global scroll_speed
         global pointer_speed
         while True:
-            print 2
             data = self.ser.read()
             print data
             self.gui.cmd_signal.emit(data)
@@ -75,7 +85,7 @@ class Worker(QtCore.QThread):
                 self.quit_app.emit()
                 break
             
-            elif data == '1':
+            elif data == '$':
                 print "Left Click"
                 try:
                     p.click(button = 'left')
@@ -83,7 +93,7 @@ class Worker(QtCore.QThread):
                     self.gui.ui.left_click.setEnabled(True)
                 except Exception, e:
                     print e
-            elif data == '2':
+            elif data == '#':
                 print "Right Click"
                 try:
                     p.click(button = 'right')
@@ -91,7 +101,7 @@ class Worker(QtCore.QThread):
                     self.gui.ui.right_click.setEnabled(True)
                 except Exception, e:
                     print e
-            elif data == 'a':
+            elif data == 'L':
                 print "Left Key"
                 try:
                     p.moveRel(-1 * pointer_speed,0)
@@ -99,7 +109,7 @@ class Worker(QtCore.QThread):
                     self.gui.ui.left_arrow.setEnabled(True)
                 except Exception,e:
                     print e
-            elif data == 'd':
+            elif data == 'R':
                 print "Right Key"
                 try:
                     p.moveRel(pointer_speed,0)
@@ -107,7 +117,7 @@ class Worker(QtCore.QThread):
                     self.gui.ui.right_arrow.setEnabled(True)
                 except Exception, e:
                     print e
-            elif data == 's':
+            elif data == 'D':
                 print "Down key"
                 try:
                     p.moveRel(0,pointer_speed)
@@ -115,7 +125,7 @@ class Worker(QtCore.QThread):
                     self.gui.ui.down_arrow.setEnabled(True)
                 except Exception,e:
                     print e
-            elif data == 'w':
+            elif data == 'U':
                 print "Up key"
                 try:
                     p.moveRel(0,-1 * pointer_speed)
@@ -139,11 +149,11 @@ class Worker(QtCore.QThread):
                     print e  
             else:
                 print "Unknown cmd: ", data
-            print 3
             
         
 def main():
-    print 1
+    global th
+    global app
     app = QtGui.QApplication(sys.argv)
     ex = Gui()
     ex.show()
