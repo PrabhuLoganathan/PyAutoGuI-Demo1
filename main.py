@@ -72,20 +72,22 @@ class Worker(QtCore.QThread):
     def ser_update(self):
         self.ser.port = int(self.gui.ui.com_port.text())
         self.ser.open()
+        self.gui.ui.tabWidget.setCurrentIndex(0)
     
     def run(self):
         global scroll_speed
         global pointer_speed
         while True:
             data = self.ser.read()
-            print data
             self.gui.cmd_signal.emit(data)
-            if data == '7':
+
+            """if data == '7':
                 # print "ABORTING !!"
                 self.quit_app.emit()
                 break
+            """
             
-            elif data == '$':
+            if data == '$':
                 print "Left Click"
                 try:
                     p.click(button = 'left')
@@ -94,7 +96,7 @@ class Worker(QtCore.QThread):
                 except Exception, e:
                     print e
             elif data == '#':
-                print "Right Click"
+                # print "Right Click"
                 try:
                     p.click(button = 'right')
                     self.gui.disable_all()
@@ -102,7 +104,7 @@ class Worker(QtCore.QThread):
                 except Exception, e:
                     print e
             elif data == 'L':
-                print "Left Key"
+                # print "Left Key"
                 try:
                     p.moveRel(-1 * pointer_speed,0)
                     self.gui.disable_all()
@@ -110,7 +112,7 @@ class Worker(QtCore.QThread):
                 except Exception,e:
                     print e
             elif data == 'R':
-                print "Right Key"
+                # print "Right Key"
                 try:
                     p.moveRel(pointer_speed,0)
                     self.gui.disable_all()
@@ -118,7 +120,7 @@ class Worker(QtCore.QThread):
                 except Exception, e:
                     print e
             elif data == 'D':
-                print "Down key"
+                # print "Down key"
                 try:
                     p.moveRel(0,pointer_speed)
                     self.gui.disable_all()
@@ -126,27 +128,16 @@ class Worker(QtCore.QThread):
                 except Exception,e:
                     print e
             elif data == 'U':
-                print "Up key"
+                # print "Up key"
                 try:
                     p.moveRel(0,-1 * pointer_speed)
                     self.gui.disable_all()
                     self.gui.ui.up_arrow.setEnabled(True)
                 except Exception,e:
                     print e
-            elif data == '4':
-                try:
-                    p.scroll(scroll_speed)
-                    self.gui.disable_all()
-                    self.gui.ui.scroll_up.setEnabled(True)
-                except Exception,e:
-                    print e  
-            elif data == '5':
-                try:
-                    p.scroll(-1 * scroll_speed)
-                    self.gui.disable_all()
-                    self.gui.ui.scroll_down.setEnabled(True)
-                except Exception,e:
-                    print e  
+            elif data == '0':
+                print "Error!!"
+                
             else:
                 print "Unknown cmd: ", data
             
